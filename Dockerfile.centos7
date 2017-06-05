@@ -25,7 +25,7 @@ RUN yum -y install centos-release-scl && \
 ### Add your package needs to this installation line
     yum -y install --setopt=tsflags=nodocs golang-github-cpuguy83-go-md2man rh-python35 && \
 ### help file markdown to man conversion
-    go-md2man -in /tmp/help.md -out /help.1 && yum -y remove golang-github-cpuguy83-go-md2man && \
+    go-md2man -in /tmp/help.md -out /help.1 && \
     yum clean all
 
 ### Setup user for build execution and application runtime
