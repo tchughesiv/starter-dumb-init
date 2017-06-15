@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tchughesiv/starter-dumb-init.svg?branch=master)](https://travis-ci.org/tchughesiv/starter-dumb-init)
+
 ## Starter RHEL-based Image w/ best practices 
 This image aims to include Red Hat's most critical [container best practices](http://docs.projectatomic.io/container-best-practices/).
 
@@ -23,6 +25,11 @@ http://developers.redhat.com/products/cdk/overview/
 
 Once your host is setup you can begin your Dockerfile with this example. This will ensure you're using the supported/secure base image instead of one you might find on docker's public hub, and many other benefits discussed in the best practices link above.
 ```shell
-$ docker build --pull -t acme/starter-dumb-init -t acme/starter-dumb-init:v3.2 .
-$ docker build --pull -t acme/starter-dumb-init:centos7 -f Dockerfile.centos7 .
+# build on centos7
+$ make
+
+# OR
+
+# build on rhel7
+$ make TARGET=rhel7
 ```
