@@ -4,17 +4,16 @@ IMAGE_NAME = starter-dumb-init
 
 # Allow user to pass in OS build options
 ifeq ($(TARGET),rhel7)
-	OS := rhel7
-	DFILE := Dockerfile
+	DFILE := Dockerfile.${TARGET}
 else
-	OS := centos7
-	DFILE := Dockerfile.${OS}
+	TARGET := centos7
+	DFILE := Dockerfile
 endif
 
 all: build
 build:
-	docker build --pull -t ${CONTEXT}/${IMAGE_NAME}:${OS}-${VERSION} -t ${CONTEXT}/${IMAGE_NAME} -f ${DFILE} .
-	@if docker images ${CONTEXT}/${IMAGE_NAME}:${OS}-${VERSION}; then touch build; fi
+	docker build --pull -t ${CONTEXT}/${IMAGE_NAME}:${TARGET}-${VERSION} -t ${CONTEXT}/${IMAGE_NAME} -f ${DFILE} .
+	@if docker images ${CONTEXT}/${IMAGE_NAME}:${TARGET}-${VERSION}; then touch build; fi
 
 clean:
 	rm -f build
