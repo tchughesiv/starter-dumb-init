@@ -1,0 +1,23 @@
+sudo: required
+dist: trusty
+
+env:
+  - OS_TYPE=centos OS_VERSION=7
+
+services:
+ - docker
+
+addons:
+  apt:
+    packages:
+    - nodejs
+
+install:
+  - npm install -g dockerfile_lint
+
+before_script:
+  - dockerfile_lint -f Dockerfile.${OS_TYPE}${OS_VERSION}
+
+script:
+#  - cd ./$VARIANT
+  - docker build --rm=true --tag=sonatype/nexus3 .
