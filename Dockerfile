@@ -23,8 +23,7 @@ RUN yum -y install centos-release-scl && \
 ### add your package needs to this installation line
     yum -y install --setopt=tsflags=nodocs rh-python35-python-pip && \
 ### install dumb-init
-#    source scl_source enable rh-python35 && \
-    source scl_source enable rh-python35
+    source scl_source enable rh-python35 && \
     pip install --upgrade pip && \
     pip install --no-cache-dir dumb-init && \
     python -m pip uninstall -y pip setuptools && \
@@ -38,7 +37,7 @@ ENV APP_HOME=${APP_ROOT}/src PATH=$PATH:${APP_ROOT}/bin
 RUN mkdir -p ${APP_HOME}
 COPY bin/ ${APP_ROOT}/bin/
 RUN chmod -R ug+x ${APP_ROOT}/bin /tmp/user_setup && sync && \
-    /tmp/user_setup
+    /tmp/user_setup-tommy
 
 ####### Add app-specific needs below. #######
 ### Containers should NOT run as root as a good practice
