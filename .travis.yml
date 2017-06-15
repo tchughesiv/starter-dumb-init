@@ -17,6 +17,7 @@ install:
 
 before_script:
   - dockerfile_lint -f Dockerfile
+  - dockerfile_lint -f Dockerfile.rhel7
 
 script:
   - make
