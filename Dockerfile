@@ -21,33 +21,31 @@ LABEL name="acme/starter-dumb-init" \
 ### https://github.com/projectatomic/container-best-practices/blob/master/creating/help.adoc
 COPY help.md user_setup /tmp/
 
-RUN yum clean all && \
 ### Add necessary Red Hat repos here
-    REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,rhel-server-rhscl-7-rpms \
+RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,rhel-server-rhscl-7-rpms \
 ### Add your package needs here
     INSTALL_PKGS="golang-github-cpuguy83-go-md2man \
-    rh-python35" && \
-    yum -y update-minimal --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs \
-      --security --sec-severity=Important --sec-severity=Critical && \
+    rh-python35-python-pip" && \
     yum -y install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
 ### help file markdown to man conversion
     go-md2man -in /tmp/help.md -out /help.1 && \
+### install dumb-init
+    source scl_source enable rh-python35 && \
+    pip install --upgrade pip && \
+    pip install --no-cache-dir dumb-init && \
+    python -m pip uninstall -y pip setuptools && \
+    yum -y erase golang-github-cpuguy83-go-md2man && \
     yum clean all
 
 ### Setup user for build execution and application runtime
 ENV APP_ROOT=/opt/app-root \
     USER_NAME=default \
     USER_UID=10001
-ENV APP_HOME=${APP_ROOT}/src  PATH=$PATH:${APP_ROOT}/bin
+ENV APP_HOME=${APP_ROOT}/src PATH=$PATH:${APP_ROOT}/bin
 RUN mkdir -p ${APP_HOME}
 COPY bin/ ${APP_ROOT}/bin/
 RUN chmod -R ug+x ${APP_ROOT}/bin /tmp/user_setup && \
     /tmp/user_setup
-
-### Install dumb-init
-RUN source scl_source enable rh-python35 && \
-    pip install --upgrade pip && \
-    pip install --upgrade dumb-init
 
 ####### Add app-specific needs below. #######
 ### Containers should NOT run as root as a good practice
