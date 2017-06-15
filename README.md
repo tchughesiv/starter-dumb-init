@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tchughesiv/starter-dumb-init.svg?branch=master)](https://travis-ci.org/tchughesiv/starter-dumb-init)
+
 ## Starter RHEL-based Image w/ best practices 
 This image aims to include Red Hat's most critical [container best practices](http://docs.projectatomic.io/container-best-practices/).
 

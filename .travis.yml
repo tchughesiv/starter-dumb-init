@@ -1,5 +1,5 @@
 sudo: required
-dist: trusty
+#dist: trusty
 
 env:
   - OS_TYPE=centos OS_VERSION=7
@@ -20,4 +20,4 @@ before_script:
 
 script:
 #  - cd ./$VARIANT
-  - docker build --rm=true --tag=sonatype/nexus3 .
+  - docker build --pull --rm=true -t tchughesiv/starter-dumb-init -f Dockerfile.${OS_TYPE}${OS_VERSION} .
