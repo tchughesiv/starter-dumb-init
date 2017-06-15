@@ -23,7 +23,8 @@ RUN yum -y install centos-release-scl && \
 ### add your package needs to this installation line
     yum -y install --setopt=tsflags=nodocs rh-python35-python-pip && \
 ### install dumb-init
-    source scl_source enable rh-python35 && \
+#    source scl_source enable rh-python35 && \
+    source scl_source enable rh-python35
     pip install --upgrade pip && \
     pip install --no-cache-dir dumb-init && \
     python -m pip uninstall -y pip setuptools && \
