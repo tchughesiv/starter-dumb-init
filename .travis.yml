@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 
 env:
-  - OS_TYPE=centos OS_VERSION=7
+  - OS_TYPE=centos7
 
 services:
  - docker
@@ -16,8 +16,7 @@ install:
   - npm install -g dockerfile_lint
 
 before_script:
-  - dockerfile_lint -f Dockerfile.${OS_TYPE}${OS_VERSION}
+  - dockerfile_lint -f Dockerfile.${OS_TYPE}
 
 script:
-#  - cd ./$VARIANT
-  - docker build --pull --rm=true -t tchughesiv/starter-dumb-init -f Dockerfile.${OS_TYPE}${OS_VERSION} .
+  - make
