@@ -33,3 +33,7 @@ $ make
 # build on rhel7
 $ make TARGET=rhel7
 ```
+```shell
+$ make test
+$ make run
+```
