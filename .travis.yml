@@ -1,9 +1,6 @@
 sudo: required
 dist: trusty
 
-#env:
-#  - OS_TYPE=centos7
-
 services:
  - docker
 
@@ -16,8 +13,8 @@ install:
   - npm install -g dockerfile_lint
 
 before_script:
-  - dockerfile_lint -f Dockerfile
-  - dockerfile_lint -f Dockerfile.rhel7
+  - make lint
 
 script:
   - make
+  - make test
