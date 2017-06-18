@@ -29,8 +29,8 @@ script:
   - wget `curl -s https://api.github.com/repos/openshift/origin/releases/latest | jq -r ".assets[] | select(.name | test(\"linux-64bit\")) | .browser_download_url" | grep -i client-tools`
   - tar xvfz `ls openshift-origin-client-tools-*.tar.gz` --strip-components=1 -C $HOME/bin
   - oc cluster up
+  - sleep 5
   - oc login -u system:admin
-  - sleep 10
   - oc rollout status -w dc/docker-registry -n default
   - export REGISTRY_IP=`oc get svc/docker-registry -o json -n default | jq -r '.spec.clusterIP'`
   - oc login -u developer -p developer
