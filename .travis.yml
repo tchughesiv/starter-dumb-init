@@ -19,6 +19,7 @@ before_script:
   - tmp=`mktemp`
   - echo 'DOCKER_OPTS="$DOCKER_OPTS --insecure-registry 172.30.0.0/16"' > ${tmp}
   - sudo mv ${tmp} /etc/default/docker
+  - sudo cat /etc/docker/daemon.json
   - sudo mount --make-shared /
   - sudo service docker restart
 
