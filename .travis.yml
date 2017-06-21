@@ -21,6 +21,7 @@ before_script:
   - sudo mv ${tmp} /etc/docker/daemon.json
   - sudo mount --make-shared /
   - sudo service docker restart
+  - docker info
   - make lint
 
 script:
