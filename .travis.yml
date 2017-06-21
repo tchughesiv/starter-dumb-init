@@ -16,7 +16,7 @@ before_script:
   - export PATH=$PATH:$HOME/bin
   - tmp=`mktemp`
   - echo '{' >> ${tmp}
-  - echo "insecure-registries":["172.30.0.0/16"]}' >> ${tmp}
+  - echo '"insecure-registries":["172.30.0.0/16"]' >> ${tmp}
   - echo '}' >> ${tmp}
   - sudo mv ${tmp} /etc/docker/daemon.json
   - sudo mount --make-shared /
